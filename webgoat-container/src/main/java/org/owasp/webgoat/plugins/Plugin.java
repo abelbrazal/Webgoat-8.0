@@ -2,7 +2,6 @@ package org.owasp.webgoat.plugins;
 
 import com.google.common.base.Optional;
 import com.google.common.collect.Lists;
-import org.apache.catalina.loader.WebappClassLoader;
 import org.owasp.webgoat.lessons.AbstractLesson;
 import org.springframework.util.StringUtils;
 
@@ -34,6 +33,11 @@ public class Plugin {
     private Map<String, File> lessonPlansLanguageFiles = new HashMap<>();
     private List<File> pluginFiles = Lists.newArrayList();
     private File lessonSourceFile;
+    private PluginClassLoader classLoader;
+
+    public Plugin(PluginClassLoader classLoader) {
+        this.classLoader = classLoader;
+    }
 
     /**
      * <p>findLesson.</p>
@@ -48,11 +52,9 @@ public class Plugin {
 
     private void findLesson(String name) {
         String realClassName = StringUtils.trimLeadingCharacter(name, '/').replaceAll("/", ".").replaceAll(".class", "");
-        //TODO should be passed in (refactor)
-        WebappClassLoader cl = (WebappClassLoader) Thread.currentThread().getContextClassLoader();
 
         try {
-            Class clazz = cl.loadClass(realClassName, true);
+            Class clazz = classLoader.loadClass(realClassName);
 
             if (AbstractLesson.class.isAssignableFrom(clazz)) {
                 this.lesson = clazz;

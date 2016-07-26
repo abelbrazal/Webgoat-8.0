@@ -157,13 +157,14 @@
         <standard.version>1.1.2</standard.version>
         <tiles.version>3.0.5</tiles.version>
         <tomcat-catalina.version>7.0.65</tomcat-catalina.version>
-        <tomcat7-maven-plugin.version>2.3-SNAPSHOT</tomcat7-maven-plugin.version>
+        <tomcat7-maven-plugin.version>2.4</tomcat7-maven-plugin.version>
         <versioneye-maven-plugin.version>3.5.1</versioneye-maven-plugin.version>
         <wsdl4j.version>1.6.3</wsdl4j.version>
     </properties>
 
     <modules>
         <module>webgoat-container</module>
+        <module>webgoat-standalone</module>
     </modules>
 
     <distributionManagement>
@@ -180,7 +181,7 @@
     <pluginRepositories>
         <pluginRepository>
             <id>apache.snapshots</id>
-            <url>http://repository.apache.org/snapshots/</url>
+            <url>https://repository.apache.org/snapshots/</url>
             <!-- The releases element here is due to an issue in Maven 2.0 that will be
                  fixed in future releases. This should be able to be disabled altogether. -->
             <releases>
@@ -331,3 +332,4 @@
     </build>
 
 </project>
+

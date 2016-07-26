@@ -329,15 +329,9 @@ public class Course {
      */
     public void loadLessonFromPlugin(ServletContext context) {
         logger.debug("Loading plugins into cache");
-        String pluginPath = context.getRealPath("plugin_lessons");
-        String targetPath = context.getRealPath("plugin_extracted");
-
-        if (pluginPath == null) {
-            logger.error("Plugins directory {} not found", pluginPath);
-            return;
-        }
         lessons.clear();
-        List<Plugin> plugins = new PluginsLoader(Paths.get(pluginPath), Paths.get(targetPath)).loadPlugins();
+
+        List<Plugin> plugins = new PluginsLoader().loadPlugins();
         for (Plugin plugin : plugins) {
             try {
                 AbstractLesson lesson = plugin.getLesson().get();

@@ -29,14 +29,14 @@ public class PluginExtractor {
     /**
      * <p>extractJarFile.</p>
      *
-     * @param archive a {@link java.io.File} object.
+     * @param archive         a {@link java.io.File} object.
      * @param targetDirectory a {@link java.io.File} object.
      * @return a {@link org.owasp.webgoat.plugins.Plugin} object.
      * @throws java.io.IOException if any.
      */
-    public Plugin extractJarFile(final File archive, final File targetDirectory) throws IOException {
+    public Plugin extractJarFile(final File archive, final File targetDirectory, PluginClassLoader cl) throws IOException {
         ZipFile zipFile = new ZipFile(archive);
-        Plugin plugin = new Plugin();
+        Plugin plugin = new Plugin(cl);
         try {
             Enumeration<? extends ZipEntry> entries = zipFile.entries();
             while (entries.hasMoreElements()) {
