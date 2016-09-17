@@ -140,7 +140,7 @@ public class WebGoatIT implements SauceOnDemandSessionIdProvider {
         browsers.add(new String[]{"Windows 10", "38", "firefox", null, null});
 
         // Linux, Firefox 37
-        browsers.add(new String[]{"Linux", "37", "firefox", null, null});
+       // browsers.add(new String[]{"Linux", "37", "firefox", null, null});
 
 
         // windows 7, IE 9
@@ -404,7 +404,7 @@ public class WebGoatIT implements SauceOnDemandSessionIdProvider {
         WebElement submit = driver.findElement(By.name("SUBMIT"));
         submit.click();
         wait = new FluentWait(driver)
-                .withTimeout(10, SECONDS)
+                .withTimeout(20, SECONDS)
                 .pollingEvery(2, SECONDS)
                 .ignoring(NoSuchElementException.class);
         wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("message"), "Stage 1 completed."));
