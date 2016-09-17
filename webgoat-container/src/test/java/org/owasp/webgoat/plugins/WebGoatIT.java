@@ -423,10 +423,11 @@ public class WebGoatIT implements SauceOnDemandSessionIdProvider {
         String cmd = "document.getElementsByName('GRANDTOT')[0].value = '$0.00';";
         javascript.executeScript(cmd);
 
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
 
         submit = driver.findElement(By.name("SUBMIT"));
         submit.click();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         wait = new FluentWait(driver)
                 .withTimeout(10, SECONDS)
                 .pollingEvery(2, SECONDS)
