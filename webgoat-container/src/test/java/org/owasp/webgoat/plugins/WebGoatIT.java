@@ -410,7 +410,12 @@ public class WebGoatIT implements SauceOnDemandSessionIdProvider {
         wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("message"), "Stage 1 completed."));
 
         //Stage 2
-        WebElement qty = driver.findElement(By.name("QTY1"));
+        wait = new FluentWait(driver)
+                .withTimeout(10, SECONDS)
+                .pollingEvery(2, SECONDS)
+                .ignoring(NoSuchElementException.class)
+                .ignoring(StaleElementReferenceException.class);
+        WebElement qty = wait.until(ExpectedConditions.presenceOfElementLocated(By.name("QTY1")));
         qty.click();
         qty.sendKeys("8");
         qty = driver.findElement(By.name("QTY1"));
