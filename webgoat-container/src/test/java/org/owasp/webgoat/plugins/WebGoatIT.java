@@ -43,7 +43,7 @@ public class WebGoatIT implements SauceOnDemandSessionIdProvider {
 
     // Since most Tomcat deployments run on port 8080, let's set the automated integration tests to
     // spawn tomcat on port 8888 so that we don't interfere with local Tomcat's
-    private String baseWebGoatUrl = "http://localhost:8888/WebGoat";
+    protected String baseWebGoatUrl = "http://localhost:8888/WebGoat";
     private String loginUser = "webgoat";
     private String loginPassword = "webgoat";
 
@@ -98,7 +98,7 @@ public class WebGoatIT implements SauceOnDemandSessionIdProvider {
     /**
      * The {@link WebDriver} instance which is used to perform browser interactions with.
      */
-    private WebDriver driver;
+    protected WebDriver driver;
 
 
     /**
@@ -385,69 +385,69 @@ public class WebGoatIT implements SauceOnDemandSessionIdProvider {
         wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("lesson-plan-content"), "Lesson Plan Title: How to Perform a SQL Injection"));
     }
 
-    @Test
-    public void testClientSideValidation() throws IOException {
-        doLoginWebgoatUser();
-
-        driver.get(baseWebGoatUrl + "/start.mvc#attack/1129417221/200");
-        driver.get(baseWebGoatUrl + "/service/restartlesson.mvc");
-        driver.get(baseWebGoatUrl + "/start.mvc#attack/1129417221/200");
-
-        FluentWait<WebDriver> wait = new WebDriverWait(driver, 15); // wait for a maximum of 15 seconds
-        wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("lesson-title"), "Insecure Client Storage"));
-
-        //Stage 1
-        WebElement user = driver.findElement(By.name("field1"));
-        user.click();
-        user.sendKeys("PLATINUM");
-
-        WebElement submit = driver.findElement(By.name("SUBMIT"));
-        submit.click();
-        wait = new FluentWait(driver)
-                .withTimeout(20, SECONDS)
-                .pollingEvery(2, SECONDS)
-                .ignoring(NoSuchElementException.class);
-        wait.until(new Predicate<WebDriver>() {
-            @Override
-            public boolean apply(WebDriver input) {
-                return driver.getPageSource().contains("Stage 2");
-            }
-        });
-
-        //Stage 2
-        wait = new FluentWait(driver)
-                .withTimeout(10, SECONDS)
-                .pollingEvery(2, SECONDS)
-                .ignoring(NoSuchElementException.class)
-                .ignoring(StaleElementReferenceException.class);
-        WebElement qty = wait.until(ExpectedConditions.presenceOfElementLocated(By.name("QTY1")));
-        qty.click();
-        qty.sendKeys("8");
-        qty = driver.findElement(By.name("QTY1"));
-        qty.click();
-        qty.sendKeys("8");
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-
-
-        JavascriptExecutor javascript = (JavascriptExecutor) driver;
-        String cmd = "document.getElementsByName('GRANDTOT')[0].value = '$0.00';";
-        javascript.executeScript(cmd);
-
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-
-
-        submit = driver.findElement(By.name("SUBMIT"));
-        submit.click();
-        wait = new FluentWait(driver)
-                .withTimeout(10, SECONDS)
-                .pollingEvery(2, SECONDS)
-                .ignoring(NoSuchElementException.class);
-        wait.until(new Predicate<WebDriver>() {
-            public boolean apply(WebDriver driver) {
-                return driver.getPageSource().contains("Congratulations");
-            }
-        });
-    }
+//    @Test
+//    public void testClientSideValidation() throws IOException {
+//        doLoginWebgoatUser();
+//
+//        driver.get(baseWebGoatUrl + "/start.mvc#attack/1129417221/200");
+//        driver.get(baseWebGoatUrl + "/service/restartlesson.mvc");
+//        driver.get(baseWebGoatUrl + "/start.mvc#attack/1129417221/200");
+//
+//        FluentWait<WebDriver> wait = new WebDriverWait(driver, 15); // wait for a maximum of 15 seconds
+//        wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("lesson-title"), "Insecure Client Storage"));
+//
+//        //Stage 1
+//        WebElement user = driver.findElement(By.name("field1"));
+//        user.click();
+//        user.sendKeys("PLATINUM");
+//
+//        WebElement submit = driver.findElement(By.name("SUBMIT"));
+//        submit.click();
+//        wait = new FluentWait(driver)
+//                .withTimeout(20, SECONDS)
+//                .pollingEvery(2, SECONDS)
+//                .ignoring(NoSuchElementException.class);
+//        wait.until(new Predicate<WebDriver>() {
+//            @Override
+//            public boolean apply(WebDriver input) {
+//                return driver.getPageSource().contains("Stage 2");
+//            }
+//        });
+//
+//        //Stage 2
+//        wait = new FluentWait(driver)
+//                .withTimeout(10, SECONDS)
+//                .pollingEvery(2, SECONDS)
+//                .ignoring(NoSuchElementException.class)
+//                .ignoring(StaleElementReferenceException.class);
+//        WebElement qty = wait.until(ExpectedConditions.presenceOfElementLocated(By.name("QTY1")));
+//        qty.click();
+//        qty.sendKeys("8");
+//        qty = driver.findElement(By.name("QTY1"));
+//        qty.click();
+//        qty.sendKeys("8");
+//        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+//
+//
+//        JavascriptExecutor javascript = (JavascriptExecutor) driver;
+//        String cmd = "document.getElementsByName('GRANDTOT')[0].value = '$0.00';";
+//        javascript.executeScript(cmd);
+//
+//        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+//
+//
+//        submit = driver.findElement(By.name("SUBMIT"));
+//        submit.click();
+//        wait = new FluentWait(driver)
+//                .withTimeout(10, SECONDS)
+//                .pollingEvery(2, SECONDS)
+//                .ignoring(NoSuchElementException.class);
+//        wait.until(new Predicate<WebDriver>() {
+//            public boolean apply(WebDriver driver) {
+//                return driver.getPageSource().contains("Congratulations");
+//            }
+//        });
+//    }
 
     @Test
     public void testJavaScriptValidation() throws IOException {
