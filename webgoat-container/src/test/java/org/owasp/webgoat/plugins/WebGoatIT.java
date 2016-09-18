@@ -407,7 +407,12 @@ public class WebGoatIT implements SauceOnDemandSessionIdProvider {
                 .withTimeout(20, SECONDS)
                 .pollingEvery(2, SECONDS)
                 .ignoring(NoSuchElementException.class);
-        wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("message"), "Stage 1 completed."));
+        wait.until(new Predicate<WebDriver>() {
+            @Override
+            public boolean apply(WebDriver input) {
+                return driver.getPageSource().contains("Stage 2");
+            }
+        });
 
         //Stage 2
         wait = new FluentWait(driver)
