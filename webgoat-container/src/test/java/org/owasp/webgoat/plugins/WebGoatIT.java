@@ -385,7 +385,7 @@ public class WebGoatIT implements SauceOnDemandSessionIdProvider {
         wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("lesson-plan-content"), "Lesson Plan Title: How to Perform a SQL Injection"));
     }
 
-    //@Test
+    @Test
     public void testClientSideValidation() throws IOException {
         doLoginWebgoatUser();
 
