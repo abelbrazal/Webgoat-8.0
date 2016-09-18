@@ -388,7 +388,7 @@ public class WebGoatIT implements SauceOnDemandSessionIdProvider {
         wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("lesson-plan-content"), "Lesson Plan Title: How to Perform a SQL Injection"));
     }
 
-    @Test
+    //@Test
     public void testClientSideValidation() throws IOException {
         doLoginWebgoatUser();
 
@@ -398,6 +398,8 @@ public class WebGoatIT implements SauceOnDemandSessionIdProvider {
 
         FluentWait<WebDriver> wait = new WebDriverWait(getWebDriver(), 15); // wait for a maximum of 15 seconds
         wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("lesson-title"), "Insecure Client Storage"));
+
+        getWebDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
         //Stage 1
         WebElement user = getWebDriver().findElement(By.name("field1"));
