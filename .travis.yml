@@ -16,7 +16,7 @@ before_deploy:
   - export WEBGOAT_ARTIFACTS_FOLDER=$HOME/build/$TRAVIS_REPO_SLUG/Deployable_Artifacts/
   - mkdir $WEBGOAT_ARTIFACTS_FOLDER
   - cp -fa $WEBGOAT_CONTAINTER_TARGET_DIR/* $WEBGOAT_ARTIFACTS_FOLDER/
-  - echo "Contents of artifcts folder:"
+  - echo "Contents of artifacts folder:"
   - ls $WEBGOAT_ARTIFACTS_FOLDER
 deploy:
   provider: s3
