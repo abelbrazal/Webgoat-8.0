@@ -87,11 +87,11 @@
                                 </goals>
                             </execution>
                         </executions>
-                        <configuration>
-                            <systemPropertyVariables>
-                                <log4j.configuration>file:${project.build.testOutputDirectory}/log4j-silent.properties</log4j.configuration>
-                            </systemPropertyVariables>
-                        </configuration>
+                        <!--<configuration>-->
+                            <!--<systemPropertyVariables>-->
+                                <!--<log4j.configuration>file:${project.build.testOutputDirectory}/log4j-silent.properties</log4j.configuration>-->
+                            <!--</systemPropertyVariables>-->
+                        <!--</configuration>-->
                     </plugin>
                 </plugins>
             </build>
