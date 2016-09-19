@@ -36,6 +36,7 @@
                             <attachArtifactClassifier>exec</attachArtifactClassifier>
                             <contextReloadable>true</contextReloadable>
                             <useSeparateTomcatClassLoader>true</useSeparateTomcatClassLoader>
+                            <tomcatLoggingFile>${project.basedir}/src/test/resources/logging.properties</tomcatLoggingFile>
                             <contextFile>${project.basedir}/src/main/webapp/WEB-INF/context.xml</contextFile>
                         </configuration>
                         <dependencies>
