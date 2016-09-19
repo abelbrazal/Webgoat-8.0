@@ -36,7 +36,7 @@
                             <attachArtifactClassifier>exec</attachArtifactClassifier>
                             <contextReloadable>true</contextReloadable>
                             <useSeparateTomcatClassLoader>true</useSeparateTomcatClassLoader>
-                            <tomcatLoggingFile>${project.basedir}/src/test/resources/logging.properties</tomcatLoggingFile>
+                            <tomcatLoggingFile>${project.build.outputDirectory}/logging.txt</tomcatLoggingFile>
                             <contextFile>${project.basedir}/src/main/webapp/WEB-INF/context.xml</contextFile>
                         </configuration>
                         <dependencies>
@@ -178,6 +178,7 @@
                     <path>/WebGoat</path>
                     <attachArtifactClassifier>exec</attachArtifactClassifier>
                     <contextReloadable>true</contextReloadable>
+                    <tomcatLoggingFile>${project.build.outputDirectory}/logging.txt</tomcatLoggingFile>
                     <useSeparateTomcatClassLoader>true</useSeparateTomcatClassLoader>
                     <contextFile>${project.basedir}/src/main/webapp/WEB-INF/context.xml</contextFile>
                 </configuration>
@@ -209,62 +210,6 @@
                     <parallel>all</parallel>
                     <threadCount>10</threadCount>
                     <perCoreThreadCount>false</perCoreThreadCount>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>com.github.webdriverextensions</groupId>
-                <artifactId>webdriverextensions-maven-plugin</artifactId>
-                <version>3.0.2</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>install-drivers</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <keepDownloadedWebdrivers>true</keepDownloadedWebdrivers>
-                    <drivers>
-                        <driver>
-                            <name>edgedriver</name>
-                            <platform>windows</platform>
-                            <bit>64</bit>
-                            <version>3.14366</version>
-                        </driver>
-                        <!--<driver>-->
-                            <!--<name>firefox</name>-->
-                            <!--<platform>windows</platform>-->
-                            <!--<bit>32</bit>-->
-                            <!--<version>49.0b9</version>-->
-                            <!--<url>https://ftp.mozilla.org/pub/firefox/releases/49.0b9/firefox-49.0b9.win64.sdk.zip</url>-->
-                            <!--<fileMatchInside>.*/firefox-sdk/bin/firefox.exe$</fileMatchInside>-->
-                        <!--</driver>-->
-
-                    </drivers>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>com.github.webdriverextensions</groupId>
-                <artifactId>webdriverextensions-maven-plugin</artifactId>
-                <version>3.0.2</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>install-drivers</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <drivers>
-                        <driver>
-                            <name>internetexplorerdriver</name>
-                            <version>2.53.1</version>
-                        </driver>
-                        <driver>
-                            <name>chromedriver</name>
-                            <version>2.22</version>
-                        </driver>
-                    </drivers>
                 </configuration>
             </plugin>
         </plugins>
