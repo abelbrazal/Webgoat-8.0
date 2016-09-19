@@ -3,12 +3,13 @@ jdk:
   - oraclejdk7
 install: "/bin/true"
 script:
-  - mvn clean install
+  - mvn clean install -q
   - git clone -b develop https://github.com/WebGoat/WebGoat-Lessons.git
-  - mvn -file ./WebGoat-Lessons/pom.xml clean package
+  - mvn -file ./WebGoat-Lessons/pom.xml clean package -q
   - cp -fa ./WebGoat-Lessons/target/plugins/*.jar ./webgoat-container/src/main/webapp/plugin_lessons/
   - echo "Starting functional testing, please be patient..."
-  - if [[ $TRAVIS_PULL_REQUEST == "false" ]]; then mvn "-Dbuild.number=$TRAVIS_BUILD_NUMBER" -Prun-integration-tests clean install 1> /dev/null; else mvn clean install -q 1> /dev/null; fi
+  - mvn clean install -q 1> /dev/null
+  - if [[ $TRAVIS_PULL_REQUEST == "false" ]]; then mvn "-Dbuild.number=$TRAVIS_BUILD_NUMBER" -Prun-integration-tests clean install -q 1> /dev/null; else mvn clean install -q 1> /dev/null; fi
 cache:
   directories:
   - $HOME/.m2
