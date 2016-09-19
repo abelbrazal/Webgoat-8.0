@@ -6,11 +6,10 @@ import org.apache.catalina.connector.Connector;
 import org.apache.catalina.core.StandardContext;
 import org.apache.catalina.startup.Tomcat;
 import org.apache.coyote.AbstractProtocol;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.net.InetAddress;
+import java.util.logging.Level;
 
 import static com.github.ryenus.rop.OptionParser.Command;
 
@@ -46,7 +45,7 @@ import static com.github.ryenus.rop.OptionParser.Command;
 @Command(name = "webgoat", descriptions = "Starting WebGoat")
 public class Main {
 
-    private final Logger logger = LoggerFactory.getLogger(Main.class);
+    //private final Logger logger = LoggerFactory.getLogger(Main.class);
 
     @Option(opt = {"-p", "--port"}, description = "HTTP port to use")
     int port = 6047;
@@ -67,9 +66,11 @@ public class Main {
             protocol.setAddress(InetAddress.getByName(address));
             protocol.setPort(port);
         }
+        java.util.logging.Logger logger = java.util.logging.Logger.getLogger("");
+        logger.setLevel(Level.SEVERE);
         tomcat.getService().addConnector(connector);
         tomcat.start();
-        logger.info("Browse to http://{}:{}/WebGoat and happy hacking!", address, port);
+        logger.severe(String.format("Browse to http://%s:%s/WebGoat and happy hacking!", address, port));
         tomcat.getServer().await();
     }
 
