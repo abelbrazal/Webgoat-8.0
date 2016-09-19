@@ -87,6 +87,9 @@
                                 </goals>
                             </execution>
                         </executions>
+                        <configuration>
+                            <argLine>-Dlog4j.configuration=</argLine>
+                        </configuration>
                     </plugin>
                 </plugins>
             </build>
@@ -207,6 +210,9 @@
                     <excludes>
                         <exclude>**/*IT.java</exclude>
                     </excludes>
+                    <systemPropertyVariables>
+                        <log4j.configuration>file:${basedir}/src/test/resources/log4j-silent.properties</log4j.configuration>
+                    </systemPropertyVariables>
                     <parallel>all</parallel>
                     <threadCount>10</threadCount>
                     <perCoreThreadCount>false</perCoreThreadCount>
@@ -470,11 +476,6 @@
             <artifactId>sauce_junit</artifactId>
             <version>${sauce_junit.version}</version>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.github.webdriverextensions</groupId>
-            <artifactId>webdriverextensions</artifactId>
-            <version>2.8.0</version>
         </dependency>
         <!-- ************* END: Dependencies for Unit and Integration Testing ************** -->
         <!-- ************* END: <dependencies> ************** -->
