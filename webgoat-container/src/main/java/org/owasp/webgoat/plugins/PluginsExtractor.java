@@ -1,9 +1,13 @@
 package org.owasp.webgoat.plugins;
 
 import com.google.common.collect.Lists;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.owasp.webgoat.i18n.PluginMessages;
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider;
+import org.springframework.core.type.filter.RegexPatternTypeFilter;
 import org.springframework.util.ResourceUtils;
 
 import java.io.*;
@@ -12,7 +16,9 @@ import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.*;
+import java.util.regex.Pattern;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
@@ -37,12 +43,22 @@ public class PluginsExtractor {
         this.messages = messages;
     }
 
+
     /**
      * <p>loadPlugins.</p>
      *
      * @return a {@link java.util.List} object.
      */
-    public List<Plugin> loadPlugins() {
+    @SneakyThrows
+    public List<Plugin> loadPlugins()  {
+        final ClassPathScanningCandidateComponentProvider provider = new ClassPathScanningCandidateComponentProvider(false);
+        provider.addIncludeFilter(new RegexPatternTypeFilter(Pattern.compile(".*")));
+        final Set<BeanDefinition> classes = provider.findCandidateComponents("org.owasp.webgoat.plugin");
+        for (BeanDefinition bean : classes) {
+            Class<?> clazz = Class.forName(bean.getBeanClassName());
+        }
+
+
         List<Plugin> plugins = Lists.newArrayList();
         try {
             URL location = this.getClass().getProtectionDomain().getCodeSource().getLocation();

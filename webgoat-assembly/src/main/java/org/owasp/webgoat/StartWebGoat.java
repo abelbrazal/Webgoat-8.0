@@ -1,17 +1,8 @@
-package org.owasp.webgoat.plugin;
-
-import org.owasp.webgoat.lessons.Category;
-import org.owasp.webgoat.lessons.NewLesson;
-
-import java.util.ArrayList;
-import java.util.List;
-
-/**
- * ************************************************************************************************
+/*
  * This file is part of WebGoat, an Open Web Application Security Project utility. For details,
  * please see http://www.owasp.org/
  * <p>
- * Copyright (c) 2002 - 20014 Bruce Mayhew
+ * Copyright (c) 2002 - 2017 Bruce Mayhew
  * <p>
  * This program is free software; you can redistribute it and/or modify it under the terms of the
  * GNU General Public License as published by the Free Software Foundation; either version 2 of the
@@ -30,34 +21,20 @@ import java.util.List;
  * Source for this application is maintained at https://github.com/WebGoat/WebGoat, a repository for free software
  * projects.
  * <p>
- *
- * @author WebGoat
- * @version $Id: $Id
- * @since October 12, 2016
  */
-public class VulnerableComponents extends NewLesson {
-    @Override
-    public Category getDefaultCategory() {
-        return Category.VULNERABLE_COMPONENTS;
+package org.owasp.webgoat;import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+/**
+ * @author nbaars
+ * @date 2/21/17
+ */
+@SpringBootApplication
+public class StartWebGoat  {
+
+    public static void main(String[] args) {
+        SpringApplication.run(WebGoat.class, args);
     }
 
-    @Override
-    public List<String> getHints() {
-        return new ArrayList();
-    }
 
-    @Override
-    public Integer getDefaultRanking() {
-        return 1;
-    }
-
-    @Override
-    public String getTitle() {
-        return "vulnerable-components.title";
-    }
-
-    @Override
-    public String getId() {
-        return "VulnerableComponents";
-    }
 }
