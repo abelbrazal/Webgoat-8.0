@@ -1,35 +1,11 @@
-<!--
-  ~ This file is part of WebGoat, an Open Web Application Security Project utility. For details,
-  ~ please see http://www.owasp.org/
-  ~ <p>
-  ~ Copyright (c) 2002 - 2017 Bruce Mayhew
-  ~ <p>
-  ~ This program is free software; you can redistribute it and/or modify it under the terms of the
-  ~ GNU General Public License as published by the Free Software Foundation; either version 2 of the
-  ~ License, or (at your option) any later version.
-  ~ <p>
-  ~ This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
-  ~ even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
-  ~ General Public License for more details.
-  ~ <p>
-  ~ You should have received a copy of the GNU General Public License along with this program; if
-  ~ not, write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
-  ~ 02111-1307, USA.
-  ~ <p>
-  ~ Getting Source ==============
-  ~ <p>
-  ~ Source for this application is maintained at https://github.com/WebGoat/WebGoat, a repository for free software
-  ~ projects.
-  ~ <p>
-  -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <artifactId>webgoat-assembly</artifactId>
     <packaging>jar</packaging>
     <parent>
-        <groupId>org.owasp.webgoat.lesson</groupId>
-        <artifactId>webgoat-lessons-parent</artifactId>
+        <groupId>org.owasp.webgoat</groupId>
+        <artifactId>webgoat-parent</artifactId>
         <version>8.0-SNAPSHOT</version>
     </parent>
 
@@ -41,17 +17,53 @@
         <dependency>
             <groupId>org.owasp.webgoat</groupId>
             <artifactId>webgoat-container</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.owasp.webgoat.lesson</groupId>
+            <artifactId>client-side-filtering</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.owasp.webgoat.lesson</groupId>
+            <artifactId>cross-site-scripting</artifactId>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>org.owasp.webgoat.lesson</groupId>
             <artifactId>http-basics</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.owasp.webgoat.lesson</groupId>
+            <artifactId>http-proxies</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.owasp.webgoat.lesson</groupId>
+            <artifactId>idor</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.owasp.webgoat.lesson</groupId>
+            <artifactId>sql-injection</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.owasp.webgoat.lesson</groupId>
+            <artifactId>vulnerable-components</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.owasp.webgoat.lesson</groupId>
+            <artifactId>xxe</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
         <plugins>
-            <plugin>
+            <plugin>3
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
@@ -70,6 +82,9 @@
                             <artifactId>jruby-complete</artifactId>
                         </dependency>
                     </requiresUnpack>
+                    <jvmArguments>
+                        -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=8000
+                    </jvmArguments>
                     <fork>true</fork>
                 </configuration>
                 <!--<dependencies>-->

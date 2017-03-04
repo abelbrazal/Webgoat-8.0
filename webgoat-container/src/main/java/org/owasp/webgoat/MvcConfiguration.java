@@ -92,7 +92,7 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter {
     @Bean
     public AsciiDoctorTemplateResolver asciiDoctorTemplateResolver(Language language) {
         AsciiDoctorTemplateResolver resolver = new AsciiDoctorTemplateResolver(pluginTargetDirectory, language);
-        resolver.setCacheable(true);
+        resolver.setCacheable(false);
         resolver.setOrder(3);
         return resolver;
     }

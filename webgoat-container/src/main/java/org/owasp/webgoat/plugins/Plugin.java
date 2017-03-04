@@ -10,7 +10,6 @@ import org.owasp.webgoat.assignments.Endpoint;
 import org.owasp.webgoat.lessons.AbstractLesson;
 import org.owasp.webgoat.lessons.Assignment;
 import org.owasp.webgoat.lessons.NewLesson;
-import org.springframework.util.StringUtils;
 
 import java.io.File;
 import java.nio.file.Path;
@@ -27,9 +26,8 @@ import static org.owasp.webgoat.plugins.PluginFileUtils.fileEndsWith;
  */
 public class Plugin {
 
+    private final PluginResource pluginResource;
     @Getter
-    private final String originationJar;
-    private PluginClassLoader classLoader;
     private Class<NewLesson> newLesson;
     @Getter
     private List<Class<AssignmentEndpoint>> assignments = Lists.newArrayList();
@@ -37,52 +35,28 @@ public class Plugin {
     private List<Class<Endpoint>> endpoints = Lists.newArrayList();
     private List<File> pluginFiles = Lists.newArrayList();
 
-    public Plugin(PluginClassLoader classLoader, String originatingJar) {
-        this.classLoader = classLoader;
-        this.originationJar = originatingJar;
-    }
-
-    /**
-     * <p>findLesson.</p>
-     *
-     * @param classes a {@link java.util.List} object.
-     */
-    public void findLesson(List<String> classes) {
-        for (String clazzName : classes) {
-            findLesson(clazzName);
-        }
-    }
-
-    private void findLesson(String name) {
-        String realClassName = StringUtils.trimLeadingCharacter(name, '/').replaceAll("/", ".").replaceAll(".class", "");
-
-        try {
-            Class clazz = classLoader.loadClass(realClassName);
-            if (NewLesson.class.isAssignableFrom(clazz)) {
-                this.newLesson = clazz;
-            }
-        } catch (ClassNotFoundException ce) {
-            throw new PluginLoadingFailure("Class " + realClassName + " listed in jar but unable to load the class.", ce);
-        }
+    public Plugin(PluginResource pluginResource) {
+        this.pluginResource = pluginResource;
+       // this.newLesson = this.pluginResource.getLesson();
     }
 
     public void findEndpoints(List<String> classes) {
-        for (String clazzName : classes) {
-            String realClassName = StringUtils.trimLeadingCharacter(clazzName, '/').replaceAll("/", ".").replaceAll(".class", "");
-
-            try {
-                Class clazz = classLoader.loadClass(realClassName);
-
-                if (AssignmentEndpoint.class.isAssignableFrom(clazz)) {
-                    this.assignments.add(clazz);
-                } else
-                    if (Endpoint.class.isAssignableFrom(clazz)) {
-                        this.endpoints.add(clazz);
-                    }
-            } catch (ClassNotFoundException ce) {
-                throw new PluginLoadingFailure("Class " + realClassName + " listed in jar but unable to load the class.", ce);
-            }
-        }
+//        for (String clazzName : classes) {
+//            String realClassName = StringUtils.trimLeadingCharacter(clazzName, '/').replaceAll("/", ".").replaceAll(".class", "");
+//
+//            try {
+//                Class clazz = classLoader.loadClass(realClassName);
+//
+//                if (AssignmentEndpoint.class.isAssignableFrom(clazz)) {
+//                    this.assignments.add(clazz);
+//                } else
+//                    if (Endpoint.class.isAssignableFrom(clazz)) {
+//                        this.endpoints.add(clazz);
+//                    }
+//            } catch (ClassNotFoundException ce) {
+//                throw new PluginLoadingFailure("Class " + realClassName + " listed in jar but unable to load the class.", ce);
+//            }
+//        }
     }
 
     /**

@@ -4,6 +4,9 @@ package org.owasp.webgoat.plugins;
 import com.google.common.base.Preconditions;
 import lombok.experimental.UtilityClass;
 import org.apache.commons.io.IOUtils;
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider;
+import org.springframework.core.type.filter.RegexPatternTypeFilter;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -12,6 +15,10 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Collection;
+import java.util.List;
+import java.util.Set;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 /**
  * <p>PluginFileUtils class.</p>
@@ -21,6 +28,19 @@ import java.util.Collection;
  */
 @UtilityClass
 public class PluginFileUtils {
+
+    public static List<Class> scanForClasses(String packageName) {
+        final ClassPathScanningCandidateComponentProvider provider = new ClassPathScanningCandidateComponentProvider(false);
+        provider.addIncludeFilter(new RegexPatternTypeFilter(Pattern.compile(".*")));
+        final Set<BeanDefinition> classes = provider.findCandidateComponents(packageName); //"org.owasp.webgoat.plugin");
+        return classes.parallelStream().map(b -> {
+            try {
+                return Class.forName(b.getBeanClassName());
+            } catch (ClassNotFoundException e) {
+                throw new PluginLoadingFailure("", e);
+            }
+        }).collect(Collectors.toList());
+    }
 
     /**
      * <p>fileEndsWith.</p>

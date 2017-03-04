@@ -9,7 +9,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
@@ -35,29 +34,30 @@ public class PluginExtractor {
      * @throws java.io.IOException if any.
      */
     public Plugin extractJarFile(final File archive, final File targetDirectory, PluginClassLoader cl) throws IOException {
-        ZipFile zipFile = new ZipFile(archive);
-        Plugin plugin = new Plugin(cl, zipFile.getName());
-        try {
-            Enumeration<? extends ZipEntry> entries = zipFile.entries();
-            while (entries.hasMoreElements()) {
-                final ZipEntry zipEntry = entries.nextElement();
-                if (shouldProcessFile(zipEntry)) {
-                    boolean processed = processClassFile(zipFile, zipEntry, targetDirectory);
-
-                    if (!processed) {
-                        processed = processPropertyFile(zipFile, zipEntry, targetDirectory);
-                    }
-                    if (!processed) {
-                        processFile(plugin, zipFile, zipEntry, targetDirectory);
-                    }
-                }
-            }
-        } finally {
-            plugin.findLesson(this.classes);
-            plugin.findEndpoints(this.classes);
-            zipFile.close();
-        }
-        return plugin;
+//        ZipFile zipFile = new ZipFile(archive);
+//        Plugin plugin = new Plugin(cl, zipFile.getName());
+//        try {
+//            Enumeration<? extends ZipEntry> entries = zipFile.entries();
+//            while (entries.hasMoreElements()) {
+//                final ZipEntry zipEntry = entries.nextElement();
+//                if (shouldProcessFile(zipEntry)) {
+//                    boolean processed = processClassFile(zipFile, zipEntry, targetDirectory);
+//
+//                    if (!processed) {
+//                        processed = processPropertyFile(zipFile, zipEntry, targetDirectory);
+//                    }
+//                    if (!processed) {
+//                        processFile(plugin, zipFile, zipEntry, targetDirectory);
+//                    }
+//                }
+//            }
+//        } finally {
+//            plugin.findLesson(this.classes);
+//            plugin.findEndpoints(this.classes);
+//            zipFile.close();
+//        }
+//        return plugin;
+        return null;
     }
 
     private void processFile(Plugin plugin, ZipFile zipFile, ZipEntry zipEntry, File targetDirectory)
