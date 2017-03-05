@@ -120,7 +120,9 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter {
 
     @Bean
     public PluginMessages pluginMessages(Messages messages, Language language) {
-        return new PluginMessages(messages, language);
+        PluginMessages pluginMessages = new PluginMessages(messages, language);
+        pluginMessages.setBasenames("plugin/i18n/WebGoatLabels");
+        return pluginMessages;
     }
 
     @Bean
