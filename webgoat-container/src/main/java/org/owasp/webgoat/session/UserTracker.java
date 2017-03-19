@@ -6,10 +6,12 @@ import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.owasp.webgoat.lessons.AbstractLesson;
 import org.owasp.webgoat.lessons.Assignment;
-import org.springframework.util.FileCopyUtils;
-import org.springframework.util.SerializationUtils;
+import org.springframework.core.serializer.DefaultDeserializer;
+import org.springframework.core.serializer.DefaultSerializer;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -89,7 +91,8 @@ public class UserTracker {
         File file = new File(webgoatHome, user + ".progress");
         if (file.exists() && file.isFile()) {
             try {
-                this.storage = (Map<String, LessonTracker>) SerializationUtils.deserialize(FileCopyUtils.copyToByteArray(file));
+                DefaultDeserializer deserializer = new DefaultDeserializer(Thread.currentThread().getContextClassLoader());
+                this.storage = (Map<String, LessonTracker>) deserializer.deserialize(new FileInputStream(file));
             } catch (Exception e) {
                 log.error("Unable to read the progress file, creating a new one...");
                 this.storage = Maps.newHashMap();
@@ -100,7 +103,8 @@ public class UserTracker {
     @SneakyThrows
     private void save() {
         File file = new File(webgoatHome, user + ".progress");
-        FileCopyUtils.copy(SerializationUtils.serialize(this.storage), file);
+        DefaultSerializer serializer = new DefaultSerializer();
+        serializer.serialize(this.storage, new FileOutputStream(file));
     }
 
 

@@ -23,7 +23,6 @@ public class PluginResource {
 
     private final URL location;
     private final List<Class> classes;
-    private static final String WEBGOAT_VERSION = PluginResource.class.getPackage().getImplementationVersion();
 
     public Optional<Class> getLesson() {
         return classes.stream().filter(c -> c.getSuperclass() == NewLesson.class).findFirst();

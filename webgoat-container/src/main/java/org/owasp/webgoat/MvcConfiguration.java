@@ -41,6 +41,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
@@ -82,8 +83,8 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter {
     }
 
     @Bean
-    public LessonTemplateResolver lessonTemplateResolver() {
-        LessonTemplateResolver resolver = new LessonTemplateResolver(pluginTargetDirectory);
+    public LessonTemplateResolver lessonTemplateResolver(ResourceLoader resourceLoader) {
+        LessonTemplateResolver resolver = new LessonTemplateResolver(pluginTargetDirectory, resourceLoader);
         resolver.setOrder(2);
         resolver.setCacheable(false);
         return resolver;
@@ -116,6 +117,8 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/plugin_lessons/**").addResourceLocations("file:///" + pluginTargetDirectory.toString() + "/");
+        registry.addResourceHandler("/images/**").addResourceLocations("classpath:/plugin/VulnerableComponents/images/");
+        super.addResourceHandlers(registry);
     }
 
     @Bean

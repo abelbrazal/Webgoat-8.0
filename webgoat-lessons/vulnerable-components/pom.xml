@@ -37,38 +37,37 @@
     </dependencies>
 
     <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
-                <version>3.0.0</version>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>shade</goal>
-                        </goals>
-                        <configuration>
-                            <promoteTransitiveDependencies>true</promoteTransitiveDependencies>
-                            <!--<createDependencyReducedPom>false</createDependencyReducedPom>-->
-                            <artifactSet>
-                                <includes>
-                                    <include>cglib:*</include>
-                                    <include>ant:*</include>
-                                    <include>com.thoughtworks.xstream:*</include>
-                                    <include>xml-resolver:*</include>
-                                </includes>
-                            </artifactSet>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin> <!-- Need to define in child pom.xml because order matters first apply shade then copy artifact -->
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-            </plugin>
-        </plugins>
-
+        <!--<plugins>-->
+            <!--<plugin>-->
+                <!--<groupId>org.apache.maven.plugins</groupId>-->
+                <!--<artifactId>maven-shade-plugin</artifactId>-->
+                <!--<version>3.0.0</version>-->
+                <!--<executions>-->
+                    <!--<execution>-->
+                        <!--<phase>package</phase>-->
+                        <!--<goals>-->
+                            <!--<goal>shade</goal>-->
+                        <!--</goals>-->
+                        <!--<configuration>-->
+                            <!--<promoteTransitiveDependencies>true</promoteTransitiveDependencies>-->
+                            <!--&lt;!&ndash;<createDependencyReducedPom>false</createDependencyReducedPom>&ndash;&gt;-->
+                            <!--<artifactSet>-->
+                                <!--<includes>-->
+                                    <!--<include>cglib:*</include>-->
+                                    <!--<include>ant:*</include>-->
+                                    <!--<include>com.thoughtworks.xstream:*</include>-->
+                                    <!--<include>xml-resolver:*</include>-->
+                                <!--</includes>-->
+                            <!--</artifactSet>-->
+                        <!--</configuration>-->
+                    <!--</execution>-->
+                <!--</executions>-->
+            <!--</plugin>-->
+            <!--<plugin> &lt;!&ndash; Need to define in child pom.xml because order matters first apply shade then copy artifact &ndash;&gt;-->
+                <!--<groupId>org.apache.maven.plugins</groupId>-->
+                <!--<artifactId>maven-dependency-plugin</artifactId>-->
+            <!--</plugin>-->
+        <!--</plugins>-->
     </build>
 
 </project>
