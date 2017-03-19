@@ -20,6 +20,6 @@ For the components analyzed in 25,000 applications it was found that:
 
 [cols="2a,2a"]
 |===
-| image::plugin_lessons/plugin/VulnerableComponents/images/Old-Components.png[caption="Figure: ", title="Old Components", alt="Old Components", width="355", height="304", style="lesson-image"]
-| image::plugin_lessons/plugin/VulnerableComponents/images/Risk-of-Old-Components.png[caption="Figure: ", title="Risk of Old Components", alt="Risk of Old Components", width="355", height="304", style="lesson-image"]
+| image::images/Old-Components.png[caption="Figure: ", title="Old Components", alt="Old Components", width="355", height="304", style="lesson-image"]
+| image::images/Risk-of-Old-Components.png[caption="Figure: ", title="Risk of Old Components", alt="Risk of Old Components", width="355", height="304", style="lesson-image"]
 |===

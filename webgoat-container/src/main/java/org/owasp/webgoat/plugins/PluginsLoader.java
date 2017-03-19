@@ -101,6 +101,8 @@ public class PluginsLoader {
         return Lists.newArrayList();
     }
 
+
+
     @SneakyThrows
     public List<PluginResource> findPluginResources() {
         final ClassPathScanningCandidateComponentProvider provider = new ClassPathScanningCandidateComponentProvider(false);

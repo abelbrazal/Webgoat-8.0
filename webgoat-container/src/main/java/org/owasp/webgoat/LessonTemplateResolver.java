@@ -80,7 +80,7 @@ public class LessonTemplateResolver extends TemplateResolver {
         public InputStream getResourceAsStream(TemplateProcessingParameters params, String resourceName) {
             byte[] resource = resources.get(resourceName);
             if (resource == null) {
-                resource = ByteStreams.toByteArray(resourceLoader.getResource("classpath:plugin/" + resourceName + "/html/" + resourceName + ".html").getInputStream());
+                resource = ByteStreams.toByteArray(resourceLoader.getResource("classpath:/html/" + resourceName + ".html").getInputStream());
                 resources.put(resourceName, resource);
             }
             return new ByteArrayInputStream(resource);

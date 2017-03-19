@@ -7,5 +7,5 @@ WebGoat uses almost *200 Java and JavaScript* libraries.  Like most Java applica
 
 When this lesson was created WebGoat contained more than a dozen high security risks within it's components.  Most of these were not deliberate choices. How are developers supposed to track this information across the hundreds of components?
 
-image::plugin_lessons/plugin/VulnerableComponents/images/WebGoat-Vulns.png[caption="Figure: ", title="WebGoat Security Issues", alt="Security Issues", width="800", height="400", style="lesson-image"]
+image::images/WebGoat-Vulns.png[caption="Figure: ", title="WebGoat Security Issues", alt="Security Issues", width="800", height="400", style="lesson-image"]
 

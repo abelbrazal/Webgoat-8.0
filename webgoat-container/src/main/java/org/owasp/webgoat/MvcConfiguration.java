@@ -117,14 +117,15 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/plugin_lessons/**").addResourceLocations("file:///" + pluginTargetDirectory.toString() + "/");
-        registry.addResourceHandler("/images/**").addResourceLocations("classpath:/plugin/VulnerableComponents/images/");
+        //registry.addResourceHandler("/images/**").addResourceLocations("classpath:/plugin/VulnerableComponents/images/");
+        registry.addResourceHandler("/images/**").addResourceLocations("classpath:/images/");
         super.addResourceHandlers(registry);
     }
 
     @Bean
     public PluginMessages pluginMessages(Messages messages, Language language) {
         PluginMessages pluginMessages = new PluginMessages(messages, language);
-        pluginMessages.setBasenames("plugin/i18n/WebGoatLabels");
+        pluginMessages.setBasenames("i18n/WebGoatLabels");
         return pluginMessages;
     }
 
@@ -136,7 +137,7 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter {
     @Bean
     public Messages messageSource(Language language) {
         Messages messages = new Messages(language);
-        messages.setBasename("classpath:/i18n/messages");
+        messages.setBasename("classpath:i18n/messages");
         return messages;
     }
 

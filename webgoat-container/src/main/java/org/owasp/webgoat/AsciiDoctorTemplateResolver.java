@@ -91,8 +91,7 @@ public class AsciiDoctorTemplateResolver extends TemplateResolver {
          * <code>plugin/HttpBasics/lessonPlans/en/HttpBasics_content1.adoc</code>
          */
         private String computeResourceName(String resourceName) {
-            String directory = resourceName.substring(0, resourceName.indexOf("_"));
-            return String.format("plugin/%s/lessonPlans/%s/%s", directory, language.getLocale().getLanguage(), resourceName);
+            return String.format("lessonPlans/%s/%s", language.getLocale().getLanguage(), resourceName);
         }
 
 

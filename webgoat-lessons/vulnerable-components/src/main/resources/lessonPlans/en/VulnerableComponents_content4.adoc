@@ -4,6 +4,6 @@ There are several open source and paid-for solutions that will identify risk in 
 
 Dependency check uses several pieces of evidence to determine the library names.  Below is a snippet of a report:
 
-image::plugin_lessons/plugin/VulnerableComponents/images/OWASP-Dep-Check.png[caption="Figure: ", title="WebGoat Bill of Materials", alt="BoM", width="988", height="515", style="lesson-image"]
+image::images/OWASP-Dep-Check.png[caption="Figure: ", title="WebGoat Bill of Materials", alt="BoM", width="988", height="515", style="lesson-image"]
 
  
