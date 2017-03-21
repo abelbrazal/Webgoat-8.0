@@ -88,6 +88,11 @@
         </dependency>
         <dependency>
             <groupId>org.owasp.webgoat.lesson</groupId>
+            <artifactId>challenge</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.owasp.webgoat.lesson</groupId>
             <artifactId>client-side-filtering</artifactId>
             <version>${project.version}</version>
         </dependency>
@@ -155,7 +160,7 @@
                         </dependency>
                     </requiresUnpack>
                     <jvmArguments>
-                        -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=8000
+                        <!-- -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=8000-->
                     </jvmArguments>
                     <fork>true</fork>
                 </configuration>

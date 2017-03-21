@@ -1,7 +1,7 @@
 package org.owasp.webgoat.users;
 
 import lombok.AllArgsConstructor;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.owasp.webgoat.session.WebGoatUser;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -17,9 +17,8 @@ public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        WebGoatUser user = userRepository.findByUsername(username);
-        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), user.getAuthorities());
+    public WebGoatUser loadUserByUsername(String username) throws UsernameNotFoundException {
+        return userRepository.findByUsername(username);
     }
 
     public void addUser(String username, String password) {

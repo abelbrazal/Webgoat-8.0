@@ -1,5 +1,6 @@
 package org.owasp.webgoat.users;
 
+import org.owasp.webgoat.session.WebGoatUser;
 import org.springframework.data.repository.CrudRepository;
 
 /**

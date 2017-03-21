@@ -2,10 +2,10 @@ package org.owasp.webgoat.users;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.owasp.webgoat.session.WebGoatUser;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -46,8 +46,8 @@ public class RegistrationController {
     }
 
     private void autologin(String username, String password) {
-        UserDetails userDetails = userService.loadUserByUsername(username);
-        UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(userDetails, password, userDetails.getAuthorities());
+        WebGoatUser user = userService.loadUserByUsername(username);
+        UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(user, password, user.getAuthorities());
 
         authenticationManager.authenticate(usernamePasswordAuthenticationToken);
 
