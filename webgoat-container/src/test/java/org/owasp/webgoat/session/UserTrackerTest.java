@@ -8,9 +8,9 @@ import org.owasp.webgoat.lessons.Assignment;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -68,7 +68,7 @@ public class UserTrackerTest {
 
     @Test
     public void assignmentFailedShouldIncrementAttempts() {
-        UserTracker userTracker = new UserTracker(home.getParent(), "test");
+        UserTracker userTracker = new UserTracker(home.getParent(), UUID.randomUUID().toString());
         AbstractLesson lesson = mock(AbstractLesson.class);
         when(lesson.getAssignments()).thenReturn(Lists.newArrayList(new Assignment("assignment", "assignment")));
         userTracker.getLessonTracker(lesson);

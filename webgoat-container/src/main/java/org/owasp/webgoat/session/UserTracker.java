@@ -5,6 +5,7 @@ import com.google.common.collect.Maps;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.owasp.webgoat.lessons.AbstractLesson;
+import org.owasp.webgoat.lessons.Assignment;
 import org.springframework.core.serializer.DefaultDeserializer;
 import org.springframework.core.serializer.DefaultSerializer;
 
@@ -12,6 +13,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 
 /**
@@ -62,7 +64,16 @@ public class UserTracker {
      * @return the optional lesson tracker
      */
     public LessonTracker getLessonTracker(AbstractLesson lesson) {
-        Map<String, LessonTracker> storage = load();
+        return getLessonTracker(load(), lesson);
+    }
+
+    /**
+     * Returns the lesson tracker for a specific lesson if available.
+     *
+     * @param lesson the lesson
+     * @return the optional lesson tracker
+     */
+    public LessonTracker getLessonTracker(Map<String, LessonTracker> storage, AbstractLesson lesson) {
         LessonTracker lessonTracker = storage.get(lesson.getTitle());
         if (lessonTracker == null) {
             lessonTracker = new LessonTracker(lesson);
@@ -110,26 +121,30 @@ public class UserTracker {
 
 
     public void reset(AbstractLesson al) {
-        getLessonTracker(al).reset();
-        //save();
+        Map<String, LessonTracker> storage = load();
+        LessonTracker lessonTracker = getLessonTracker(storage, al);
+        lessonTracker.reset();
+        save(storage);
     }
 
     public int numberOfLessonsSolved() {
         int numberOfLessonsSolved = 0;
-//        for (LessonTracker lessonTracker : storage.values()) {
-//            if (lessonTracker.isLessonSolved()) {
-//                numberOfLessonsSolved = numberOfLessonsSolved + 1;
-//            }
-//        }
+        Map<String, LessonTracker> storage = load();
+        for (LessonTracker lessonTracker : storage.values()) {
+            if (lessonTracker.isLessonSolved()) {
+                numberOfLessonsSolved = numberOfLessonsSolved + 1;
+            }
+        }
         return numberOfLessonsSolved;
     }
 
     public int numberOfAssignmentsSolved() {
         int numberOfAssignmentsSolved = 0;
-//        for (LessonTracker lessonTracker : storage.values()) {
-//            Map<Assignment, Boolean> lessonOverview = lessonTracker.getLessonOverview();
-//            numberOfAssignmentsSolved = lessonOverview.values().stream().filter(b -> b).collect(Collectors.counting()).intValue();
-//        }
+        Map<String, LessonTracker> storage = load();
+        for (LessonTracker lessonTracker : storage.values()) {
+            Map<Assignment, Boolean> lessonOverview = lessonTracker.getLessonOverview();
+            numberOfAssignmentsSolved = lessonOverview.values().stream().filter(b -> b).collect(Collectors.counting()).intValue();
+        }
         return numberOfAssignmentsSolved;
     }
 }
