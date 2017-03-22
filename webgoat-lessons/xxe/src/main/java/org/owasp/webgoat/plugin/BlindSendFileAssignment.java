@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.PostConstruct;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
@@ -66,7 +67,7 @@ public class BlindSendFileAssignment extends AssignmentEndpoint {
         if (!targetDirectory.exists()) {
             targetDirectory.mkdir();
         }
-        FileCopyUtils.copy(classPathResource.getFile(), new File(targetDirectory, "secret.txt"));
+        FileCopyUtils.copy(classPathResource.getInputStream(), new FileOutputStream(new File(targetDirectory, "secret.txt")));
     }
 
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.ALL_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)

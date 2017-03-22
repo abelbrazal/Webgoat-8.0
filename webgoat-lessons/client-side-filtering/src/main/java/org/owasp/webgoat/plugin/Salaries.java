@@ -25,6 +25,7 @@ import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
@@ -42,7 +43,7 @@ public class Salaries extends Endpoint {
         if (!targetDirectory.exists()) {
             targetDirectory.mkdir();
         }
-        FileCopyUtils.copy(classPathResource.getFile(), new File(targetDirectory, "employees.xml"));
+        FileCopyUtils.copy(classPathResource.getInputStream(), new FileOutputStream(new File(targetDirectory, "employees.xml")));
     }
 
     @RequestMapping(produces = {"application/json"})
