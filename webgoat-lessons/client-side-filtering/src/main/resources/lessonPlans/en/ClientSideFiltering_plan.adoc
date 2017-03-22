@@ -4,3 +4,7 @@ It is always a good practice to send to the client only information which they a
 to have access to.  In this lesson, too much information is being sent to the client, creating
 a serious access control problem. For this exercise, your mission is exploit the extraneous information being returned
 by the server to discover information to which you should not have access.
+
+You are logged in as Moe Stooge, CSO of Goat Hills Financial. You have access to everyone in the company's information,
+except the CEO, Neville Bartholomew.  Or at least you shouldn't have access to the CEO's information. For this assignment,
+examine the contents of the page to see what extra information you can find.

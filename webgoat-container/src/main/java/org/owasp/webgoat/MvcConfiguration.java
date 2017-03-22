@@ -73,6 +73,7 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter {
         registry.addViewController("/start.mvc").setViewName("main_new");
     }
 
+
     @Bean
     public TemplateResolver springThymeleafTemplateResolver(ApplicationContext applicationContext) {
         SpringResourceTemplateResolver resolver = new SpringResourceTemplateResolver();
@@ -121,6 +122,8 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter {
         registry.addResourceHandler("/plugin_lessons/**").addResourceLocations("file:///" + pluginTargetDirectory.toString() + "/");
         //registry.addResourceHandler("/images/**").addResourceLocations("classpath:/plugin/VulnerableComponents/images/");
         registry.addResourceHandler("/images/**").addResourceLocations("classpath:/images/");
+        registry.addResourceHandler("/lesson_js/**").addResourceLocations("classpath:/js/");
+        registry.addResourceHandler("/lesson_css/**").addResourceLocations("classpath:/css/");
         super.addResourceHandlers(registry);
     }
 

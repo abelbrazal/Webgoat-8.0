@@ -8,7 +8,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.PostLoad;
 import javax.persistence.Transient;
 import java.util.Collection;
 import java.util.Collections;
@@ -40,7 +39,6 @@ public class WebGoatUser implements UserDetails {
         createUser();
     }
 
-    @PostLoad
     public void createUser() {
         this.user = new User(username, password, getAuthorities());
     }

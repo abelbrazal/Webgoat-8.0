@@ -1,6 +1,7 @@
 package org.owasp.webgoat.plugin;
 
 import org.owasp.webgoat.assignments.AssignmentEndpoint;
+import org.owasp.webgoat.assignments.AssignmentHints;
 import org.owasp.webgoat.assignments.AssignmentPath;
 import org.owasp.webgoat.assignments.AttackResult;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,14 +41,15 @@ import java.io.IOException;
  * @since August 11, 2016
  */
 @AssignmentPath("/clientSideFiltering/attack1")
-public class Attack extends AssignmentEndpoint {
+@AssignmentHints({"ClientSideFilteringHint1", "ClientSideFilteringHint2", "ClientSideFilteringHint3", "ClientSideFilteringHint4"})
+public class ClientSideFilteringAssignment extends AssignmentEndpoint {
 
     @RequestMapping(method = RequestMethod.POST)
-    public @ResponseBody AttackResult completed(@RequestParam String answer) throws IOException {
-        if ("450000".equals(answer)) {
-            return trackProgress(success().build());
-        } else {
-            return trackProgress(failed().build());
-        }
+    public
+    @ResponseBody
+    AttackResult completed(@RequestParam String answer) throws IOException {
+        return trackProgress("450000".equals(answer) ?
+                success().feedback("assignment.solved").build() :
+                failed().feedback("ClientSideFiltering.incorrect").build());
     }
 }

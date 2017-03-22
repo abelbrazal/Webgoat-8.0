@@ -18,7 +18,9 @@ public class UserService implements UserDetailsService {
 
     @Override
     public WebGoatUser loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userRepository.findByUsername(username);
+        WebGoatUser webGoatUser = userRepository.findByUsername(username);
+        webGoatUser.createUser();
+        return webGoatUser;
     }
 
     public void addUser(String username, String password) {
