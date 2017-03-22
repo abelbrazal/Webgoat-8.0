@@ -27,7 +27,7 @@
         <!-- of course, you can write your own ajax submission /handling in your own javascript if you like -->
         <form class="attack-form" accept-charset="UNKNOWN" prepareData="register" method="POST" name="form"
               action="/WebGoat/XXE/simple" contentType="application/xml">
-            <script th:src="@{/plugin_lessons/plugin/XXE/js/xxe.js}"
+            <script th:src="@{/lesson_js/xxe.js}"
                     language="JavaScript"></script>
             <div id="lessonContent">
                 <strong>Registration form</strong>
@@ -77,7 +77,7 @@
         <!-- of course, you can write your own ajax submission /handling in your own javascript if you like -->
         <form class="attack-form" accept-charset="UNKNOWN" prepareData="registerJson" method="POST" name="form"
               action="/WebGoat/XXE/content-type" contentType="application/json">
-            <script th:src="@{/plugin_lessons/plugin/XXE/js/xxe.js}"
+            <script th:src="@{/lesson_js/xxe.js}"
                     language="JavaScript"></script>
             <div id="lessonContent">
                 <strong>Registration form</strong>
@@ -135,13 +135,13 @@
         <!-- using attack-form class on your form will allow your request to be ajaxified and stay within the display framework for webgoat -->
         <!-- you can write your own custom forms, but standard form submission will take you to your endpoint and outside of the WebGoat framework -->
         <!-- of course, you can write your own ajax submission /handling in your own javascript if you like -->
-        <form class="attack-form" accept-charset="UNKNOWN" prepareData="registerJson" method="POST" name="form"
-              action="/WebGoat/XXE/blind" contentType="application/json">
-            <script th:src="@{/plugin_lessons/plugin/XXE/js/xxe.js}"
+        <form class="attack-form" accept-charset="UNKNOWN" prepareData="register" method="POST" name="form"
+              action="/WebGoat/XXE/blind" contentType="application/xml">
+            <script th:src="@{/lesson_js/xxe.js}"
                     language="JavaScript"></script>
             <div id="lessonContent">
                 <strong>Registration form</strong>
-                <form prepareData="registerJson" accept-charset="UNKNOWN" method="POST" name="form" action="#attack/307/100">
+                <form prepareData="register" accept-charset="UNKNOWN" method="POST" name="form" action="#attack/307/100">
                     <table>
                         <tr>
                             <td>Username</td>
