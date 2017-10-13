@@ -3,7 +3,7 @@ jdk:
 - oraclejdk8
 install: "/bin/true"
 script:
-- mvn clean install
+- mvn clean install -DskipTests
 cache:
   directories:
   - "$HOME/.m2"
@@ -21,7 +21,7 @@ deploy:
   app: webgoat-8-0
   on:
     repo: WebGoat/WebGoat
-    branch: develop
+    branch: travis
 #after_success:
 #- mvn versioneye:update
 #- mvn cobertura:cobertura coveralls:report
