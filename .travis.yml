@@ -18,25 +18,25 @@ deploy:
   provider: heroku
   api_key:
     secure: eqSm5syJhyvIwxQ/ZCMtfFVayiZjsr+1m0eIR36FKMU6iSz5V351G+VNjCy/G+7EIsm+KuoLHqbl+NxmmOsDf2YoQk8KAdnbecMLWVwB+VncLM0ZU4mEEBt3lJWUzStoy9UNgzKs6Nc/HQ0zllV61NfgFS17pNHvce5WfjKHzTA=
-  app: WebGoat
+  app: webgoat-8-0
   on:
     repo: WebGoat/WebGoat
     branch: develop
-after_success:
-- mvn versioneye:update
-- mvn cobertura:cobertura coveralls:report
+#after_success:
+#- mvn versioneye:update
+#- mvn cobertura:cobertura coveralls:report
 notifications:
   slack:
     secure: S9VFew5NSE8WDzYD1VDBUULKKT0fzgblQACznwQ85699b2yeX9TX58N3RZvRS1JVagVP1wu2xOrwN2g+AWx4Ro3UBZD5XG86uTJWpCLD4cRWHBoGMH2TfvI7/IzsWmgxH4MBxFRvZr/eEhlVAux+N9H4EoEdS4CKsJXEqV37PlA=
 env:
   global:
   - secure: ZLZKz6lGt8YZ+NhkZPBAlI235+lEmu37Tcf+yTwh5yXuHAlnvvF6hPui7rANA/stbYGOIqIdhGOXbdrwyTU4Pvg78VwJOwsa9RtHJfou3pg4Ud9i0/dEeVl8aakmg2HDaWYGcFox8X1ViVc5UWjuBLztfJKQUEx0buJoWdMSf2E=
-addons:
-  coverity_scan:
-    project:
-      name: WebGoat/WebGoat
-      description: Coverity Scan from Travis CI Build Automation
-    notification_email: webgoat@owasp.org
-    build_command_prepend: mvn clean
-    build_command: mvn -DskipTests=true package
-    branch_pattern: coverity_scan
+#addons:
+#  coverity_scan:
+#    project:
+#      name: WebGoat/WebGoat
+#      description: Coverity Scan from Travis CI Build Automation
+#    notification_email: webgoat@owasp.org
+#    build_command_prepend: mvn clean
+#    build_command: mvn -DskipTests=true package
+#    branch_pattern: coverity_scan
