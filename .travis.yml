@@ -5,7 +5,7 @@ install: "/bin/true"
 script:
 - export BRANCH=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then echo $TRAVIS_BRANCH; else echo $TRAVIS_PULL_REQUEST_BRANCH; fi)
 - echo "TRAVIS_BRANCH=$TRAVIS_BRANCH, PR=$PR, BRANCH=$BRANCH"
-- mvn clean install -DskipTests
+- mvn clean install -DskipTests -q
 cache:
   directories:
   - "$HOME/.m2"
@@ -28,12 +28,10 @@ after_success:
 - docker login -u $DOCKER_USER -p $DOCKER_PASS
 - export REPO=webgoat/webgoat-travis
 - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
-- docker build -f Dockerfile -t $REPO .
+- docker build -f webgoat-server/Dockerfile -t $REPO .
 - docker push $REPO
 env:
   global:
-  - secure: ZLZKz6lGt8YZ+NhkZPBAlI235+lEmu37Tcf+yTwh5yXuHAlnvvF6hPui7rANA/stbYGOIqIdhGOXbdrwyTU4Pvg78VwJOwsa9RtHJfou3pg4Ud9i0/dEeVl8aakmg2HDaWYGcFox8X1ViVc5UWjuBLztfJKQUEx0buJoWdMSf2E=
-  - secure: ZL1YbN8GijIVEJ1Mg2wcpBX20oWQ2iHWV3qkR6L3O54noQHeiwQdyjfQUZqVJmnU7uSnBWF0EorcYGWsH5tPSeDGenZxJ6Sxhtk3Uz0PjGSCzObKO1HMslSriwsy+8D1ecMioCIkPNN83A3JIRdsPx0PmlpnJP8VkJXlKqN9Tvk=
   #Docker login
   - secure: XgPc0UKRTUI70I4YWNQpThPPWeQIxkmzh1GNoR/SSDC2GPIBq3EfkkbSQewqil8stTy+S1/xSzc0JXG8NTn7UOxHVHA/2nhI6jX9E+DKtXQ89YwmaDNQjkbMjziAtDCIex+5TRykxNfkxj6VPYbDssrzI7iJXOIZVj/HoyO3O5E=
   #Docker password
