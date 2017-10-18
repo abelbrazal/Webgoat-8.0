@@ -3,6 +3,7 @@
 docker login -u $DOCKER_USER -p $DOCKER_PASS
 export REPO=webgoat/webgoat-travis
 
+echo "Travis tag: ${TRAVIS_TAG}"
 if [ -z "${TRAVIS_TAG}" ]; then
   echo "Tag build";
 else
