@@ -22,7 +22,7 @@ deploy:
   script: scripts/deploy-webgoat.sh
   on:
     repo: WebGoat/WebGoat
-    branch: develop
+    branch: travis
 env:
   global:
   #Docker login
