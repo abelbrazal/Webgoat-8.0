@@ -9,19 +9,20 @@ script:
 cache:
   directories:
   - "$HOME/.m2"
-before_deploy:
-  - cd webgoat-server
-
 deploy:
+  skip_cleanup: true
   provider: script
-
-after_success:
-
-- docker login -u $DOCKER_USER -p $DOCKER_PASS
-- export REPO=webgoat/webgoat-travis
-- export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
-- docker build -f Dockerfile -t $REPO .
-- docker push $REPO
+  script: scripts/deploy-webgoat.sh
+  on:
+    repo: WebGoat/WebGoat
+    tags: true
+deploy:
+  skip_cleanup: true
+  provider: script
+  script: scripts/deploy-webgoat.sh
+  on:
+    repo: WebGoat/WebGoat
+    branch: develop
 env:
   global:
   #Docker login

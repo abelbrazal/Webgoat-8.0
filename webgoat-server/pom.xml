@@ -80,22 +80,6 @@
                 </plugins>
             </build>
         </profile>
-        <profile>
-            <id>ctf</id>
-            <dependencies>
-                <dependency>
-                    <groupId>org.owasp.webgoat</groupId>
-                    <artifactId>webgoat-container</artifactId>
-                    <version>${project.version}</version>
-                    <exclusions>
-                        <exclusion>
-                            <groupId>de.flapdoodle.embed</groupId>
-                            <artifactId>de.flapdoodle.embed.mongo</artifactId>
-                        </exclusion>
-                    </exclusions>
-                </dependency>
-            </dependencies>
-        </profile>
     </profiles>
 
     <dependencies>
@@ -104,6 +88,11 @@
             <artifactId>docker-maven-plugin</artifactId>
             <version>0.4.10</version>
             <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>de.flapdoodle.embed</groupId>
+            <artifactId>de.flapdoodle.embed.mongo</artifactId>
+            <version>2.0.0</version>
         </dependency>
         <dependency>
             <groupId>org.owasp.webgoat</groupId>
