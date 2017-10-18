@@ -5,33 +5,31 @@ install: "/bin/true"
 script:
 - export BRANCH=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then echo $TRAVIS_BRANCH; else echo $TRAVIS_PULL_REQUEST_BRANCH; fi)
 - echo "TRAVIS_BRANCH=$TRAVIS_BRANCH, PR=$PR, BRANCH=$BRANCH"
-- mvn clean install -DskipTests -q
+- mvn clean install -q
 cache:
   directories:
   - "$HOME/.m2"
 deploy:
-  skip_cleanup: true
-  provider: script
-  script: bash scripts/deploy-webgoat.sh
-  on:
-    repo: WebGoat/WebGoat
-    tags: true
-deploy:
-  skip_cleanup: true
-  provider: script
-  script: bash scripts/deploy-webgoat.sh
-  on:
-    repo: WebGoat/WebGoat
-    branch: develop
-deploy:
-  provider: releases
-  api_key:
-    #api-key from webgoat-github
-    secure: pJOLBnl6427PcVg/tVy/qB18JC7b8cKpffau+IP0pjdSt7KUfBdBY3QuJ7mrM65zRoVILzggLckaew2PlRmYQRdumyWlyRn44XiJ9KO4n6Bsufbz+ictB4ggtozpp9+I9IIUh1TmqypL9lhkX2ONM9dSHmyblYpAAgMuYSK8FYc=
-  file: "webgoat-server/target/webgoat-server*.jar"
-  on:
-    repo: WebGoat/WebGoat
-    tags: true
+  - provider: script
+    skip_cleanup: true
+    script: bash scripts/deploy-webgoat.sh
+    on:
+      repo: WebGoat/WebGoat
+      tags: true
+  - provider: script
+    skip_cleanup: true
+    script: bash scripts/deploy-webgoat.sh
+    on:
+      repo: WebGoat/WebGoat
+      branch: develop
+  - provider: releases
+    api_key:
+      #api-key from webgoat-github
+      secure: pJOLBnl6427PcVg/tVy/qB18JC7b8cKpffau+IP0pjdSt7KUfBdBY3QuJ7mrM65zRoVILzggLckaew2PlRmYQRdumyWlyRn44XiJ9KO4n6Bsufbz+ictB4ggtozpp9+I9IIUh1TmqypL9lhkX2ONM9dSHmyblYpAAgMuYSK8FYc=
+    file: "webgoat-server/target/webgoat-server*.jar"
+    on:
+      repo: WebGoat/WebGoat
+      tags: true
 env:
   global:
   #Docker login
