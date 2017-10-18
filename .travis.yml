@@ -24,7 +24,7 @@ deploy:
       branch: develop
   - provider: releases
     api_key:
-      #api-key from webgoat-github
+      #api-key from webgoat-github user
       secure: pJOLBnl6427PcVg/tVy/qB18JC7b8cKpffau+IP0pjdSt7KUfBdBY3QuJ7mrM65zRoVILzggLckaew2PlRmYQRdumyWlyRn44XiJ9KO4n6Bsufbz+ictB4ggtozpp9+I9IIUh1TmqypL9lhkX2ONM9dSHmyblYpAAgMuYSK8FYc=
     file: "webgoat-server/target/webgoat-server*.jar"
     on:
