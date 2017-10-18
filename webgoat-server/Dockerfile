@@ -2,6 +2,9 @@ FROM openjdk:8-jre-slim
 
 RUN useradd --home-dir /home/webgoat --create-home -U webgoat
 
+RUN apt-get install curl -y
+
+
 COPY start.sh /home/webgoat/start.sh
 RUN chmod +x /home/webgoat/start.sh
 

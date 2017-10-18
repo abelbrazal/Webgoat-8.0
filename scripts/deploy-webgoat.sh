@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
-docker login -u $DOCKER_USER -p $DOCKER_PASS
-export REPO=webgoat/webgoat-travis
+#docker login -u $DOCKER_USER -p $DOCKER_PASS
+export REPO=webgoat/webgoat-8.0
 
 cd webgoat-server
 
-if [ ${BRANCH} == "master" ] && [ ! -z "${TRAVIS_TAG}" ]; then
+if [ "${BRANCH}" == "master" ] && [ ! -z "${TRAVIS_TAG}" ]; then
   # If we push a tag to master this will update the LATEST Docker image and tag with the version number
   docker build -f Dockerfile -t $REPO:latest .
   docker tag $REPO:${TRAVIS_TAG}
@@ -15,7 +15,7 @@ elif [ ! -z "${TRAVIS_TAG}" ]; then
   docker build -f Dockerfile -t $REPO:${TRAVIS_TAG} .
   docker tag $REPO:${TRAVIS_TAG}
   docker push $REPO
-elif [ ${BRANCH} == "develop" ]; then
+elif [ "${BRANCH}" == "develop" ]; then
   docker build -f Dockerfile -t $REPO:snapshot .
   docker push $REPO
 else
