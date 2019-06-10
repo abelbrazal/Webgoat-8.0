@@ -17,10 +17,3 @@ steps:
     echo Add other tasks to build, test, and deploy your project.
     echo See https://aka.ms/yaml
   displayName: 'Run a multi-line script'
-- task: FortifyOnDemandStatic@2
-  inputs:
-    FortifyProjects: 'https://github.com/cripher/Webgoat-8.0/blob/master/azure-pipelines.yml'
-    BSIToken: 'eyJ0ZW5hbnRJZCI6OTk1LCJ0ZW5hbnRDb2RlIjoiYWJlbCIsInJlbGVhc2VJZCI6MjA0OTQwLCJwYXlsb2FkVHlwZSI6IkFOQUxZU0lTX1BBWUxPQUQiLCJhc3Nlc3NtZW50VHlwZUlkIjoyNzMsInRlY2hub2xvZ3lUeXBlIjoiSkFWQS9KMkVFIiwidGVjaG5vbG9neVR5cGVJZCI6NywidGVjaG5vbG9neVZlcnNpb24iOiIxLjgiLCJ0ZWNobm9sb2d5VmVyc2lvbklkIjoxMiwiYXVkaXRQcmVmZXJlbmNlIjoiTWFudWFsIiwiYXVkaXRQcmVmZXJlbmNlSWQiOjEsImluY2x1ZGVUaGlyZFBhcnR5IjpmYWxzZSwiaW5jbHVkZU9wZW5Tb3VyY2VBbmFseXNpcyI6ZmFsc2UsInBvcnRhbFVyaSI6Imh0dHBzOi8vYW1zLmZvcnRpZnkuY29tIiwiYXBpVXJpIjoiaHR0cHM6Ly9hcGkuYW1zLmZvcnRpZnkuY29tIiwic2NhblByZWZlcmVuY2UiOiJTdGFuZGFyZCIsInNjYW5QcmVmZXJlbmNlSWQiOjF9'
-    APIKey: 'b5015956-bab8-4e93-bb1e-3be488ac80b2'
-    APISecret: 'QUxxS3cvUG9KdixNTHpJMzUxMjBodGJCSSlMak1L0'
-    EntitlementPreference: '2'
