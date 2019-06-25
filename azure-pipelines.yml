@@ -20,3 +20,5 @@ steps:
       APIKey: 'b5015956-bab8-4e93-bb1e-3be488ac80b2'
       APISecret: 'QUxxS3cvUG9KdixNTHpJMzUxMjBodGJCSSlMak1L0'
       EntitlementPreference: '2'
+    PurchaseEntitlements: false
+    PreferRemediation: false
